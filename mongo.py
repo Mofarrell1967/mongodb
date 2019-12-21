@@ -5,7 +5,7 @@ import os
 from env import MONGO_URI
 
 MONGODB_URI = MONGO_URI
-print(MONGODB_URI)
+
 DBS_NAME = "myTestDB"
 COLLECTION_NAME = "myFirstMDB"
 
@@ -21,7 +21,10 @@ conn = mongo_connect(MONGODB_URI)
 
 coll = conn[DBS_NAME][COLLECTION_NAME]
 
-documents = coll.find()
+
+documents = coll.update_one({'nationality': 'american'}, {'$set': {'hair_color': 'maroon'}})
+
+documents = coll.find({'nationality': 'american'})
 
 for doc in documents:
     print(doc)
